@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class StudentEnrollment {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input student information
+        System.out.print("Enter student name: ");
+        String studentName = scanner.nextLine();
+
+        System.out.print("Enter course: ");
+        String course = scanner.nextLine();
+
+        System.out.print("Enter course code: ");
+        String courseCode = scanner.nextLine();
+
+        // Input number of units
+        int numUnits;
+        do {
+            System.out.print("Enter number of units (max 10): ");
+            numUnits = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+            if (numUnits < 1 || numUnits > 10) {
+                System.out.println("Invalid number of units. Please enter a value between 1 and 10.");
+            }
+        } while (numUnits < 1 || numUnits > 10);
+
+        // Calculate enrollment fee
+        int enrollmentFee = calculateEnrollmentFee(numUnits);
+
+        // Output student information and enrollment fee
+        System.out.println("\nStudent Name: " + studentName);
+        System.out.println("Total Enrollment Fee: " + enrollmentFee);
+
+        // Payment processing
+        System.out.print("Enter payment amount: ");
+        int paymentAmount = scanner.nextInt();
+
+        // Check payment status
+        if (paymentAmount == enrollmentFee) {
+            System.out.println("Fully Paid");
+        } else if (paymentAmount < enrollmentFee) {
+            System.out.println("Partial Payment");
+            System.out.println("Amount Paid: " + paymentAmount);
+        } else {
+            System.out.println("Invalid payment amount.");
+        }
+
+        scanner.close();
+    }
+
+    // Method to calculate enrollment fee
+    private static int calculateEnrollmentFee(int numUnits) {
+        return numUnits * 1000; // Fee per unit is 1000
+    }
+}
